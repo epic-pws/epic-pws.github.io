@@ -8,7 +8,7 @@ body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     line-height: 1.6;
     color: #e8f1ff;
-    background: url('public/sso//background.jpg') no-repeat center center;
+    background: url('public/sso-media/background.jpg') no-repeat center center;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -31,7 +31,7 @@ body {
 }
 
 .showlogo {
-    background: url('public/sso//NBCUlogo.png') no-repeat center center;
+    background: url('public/sso-media/NBCUlogo.png') no-repeat center center;
     -webkit-background-size: contain;
     -moz-background-size: contain;
     -o-background-size: contain;
