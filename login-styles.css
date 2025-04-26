@@ -119,7 +119,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     height: 200px;
-    bottom: -80vh;
+    bottom: -18%;
     cursor: pointer;
     z-index: 100;
 }
