@@ -3,76 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PWS Authentication</title>
-    <link rel="stylesheet" href="login-styles.css">
+    <title>PWS Asset Management</title>
+    <link rel="stylesheet" href="asset-styles.css">
 </head>
 <body>
     <div class="__MAIN--MAIN">
-        <!-- Logo Area -->
-        <div class="_NBCU--LOGO">
-            <div class="showlogo"></div>
-        </div>
-        
         <!-- Main Content -->
         <div class="main-content">
             <div>
-                <h1 class="confirm-info--message-heading">Sign In <img src="public/sso-media/lock.png"></h1>
+                <h1 class="confirm-info--message-heading"><strong>Asset Inquiry</strong> <img src="public/asset-page/search.png" alt="Search"></h1>
             </div>
             
-            
-            
-            <!-- Login Form -->
-            <form id="login-form">
-                <div>
-                    <input type="text" id="username" name="username" class="input-field--input-text" placeholder="SSO ID" required>
+            <!-- Asset Information Panel -->
+            <div class="asset-panel">
+                <div class="asset-header">
+                    <h2>Electric Panel #965</h2>
+                    <span class="status-badge">Active</span>
                 </div>
                 
-                <div>
-                    <input type="password" id="password" name="password" class="input-field--input-text" placeholder="Password" required>
+                <div class="asset-details">
+                    <div class="detail-row">
+                        <div class="detail-label">Category:</div>
+                        <div class="detail-value">Electric Infrastructure</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Make:</div>
+                        <div class="detail-value">OLLIETRONICS</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Model:</div>
+                        <div class="detail-value">ECR-ULTRA 1050</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Serial Number:</div>
+                        <div class="detail-value">P965-05222025</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Location:</div>
+                        <div class="detail-value">Epic Universe / Area Development</div>
+                    </div>
+                    <div class="detail-row">
+                        <div class="detail-label">Department:</div>
+                        <div class="detail-value">Parkwide Systems</div>
+                    </div>
                 </div>
                 
-                <div>
-                    <button type="submit" class="button-main-text">SIGN IN</button>
-                    
+                <div class="action-buttons">
+                    <button class="button-main-text" id="maintenance-btn">MAINTENANCE LOG</button>
+                    <button class="button-secondary" id="print-btn">PRINT REPORT</button>
                 </div>
                 
                 <div class="input-error-msg" id="error-message">
-                    Authentication failed. Error code P965.
+                    Access denied. Error code <span class="ollie-hint">PWS</span>.
                 </div>
-            </form>
+            </div>
         </div>
     </div>
     
-    <!-- Hidden logo that leads to the real page -->
-    <img src="public/sso-media/dark-ollie.png" class="hidden-logo" alt="Hidden Logo" id="secret-entry">
+    <!-- Loading overlay with Ollie spinner -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+            <img src="public/asset-page/dark-ollie.png" alt="Loading" class="spinner-image">
+        </div>
+    </div>
+    
     
     <script>
+        // Execute immediately when included
+        (function() {
+            // Force the loading overlay to be hidden
+            document.getElementById('loading-overlay').style.display = 'none';
+        })();
+        
         document.addEventListener('DOMContentLoaded', function() {
-            // Handle form submission
-            const loginForm = document.getElementById('login-form');
+            // Get references to elements
+            const buttons = document.querySelectorAll('.action-buttons button');
             const errorMessage = document.getElementById('error-message');
+            const loadingOverlay = document.getElementById('loading-overlay');
             
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
+            // Double-check loading overlay is hidden
+            loadingOverlay.style.display = 'none';
+            
+            // Handle button clicks
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Show error message
+                    errorMessage.style.display = 'block';
+                    
+                    // Scroll to error message if it's below viewport
+                    const rect = errorMessage.getBoundingClientRect();
+                    if (rect.bottom > window.innerHeight) {
+                        errorMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    
+                    // Hide error message after 3 seconds
+                    setTimeout(function() {
+                        errorMessage.style.display = 'none';
+                    }, 3000);
+                });
+            });
+            
+            // Function to show loading overlay and redirect
+            function showLoadingAndRedirect() {
+                loadingOverlay.style.display = 'flex';
                 
-                // Show error message
-                errorMessage.style.display = 'block';
-                
-                // Clear form fields
-                document.getElementById('username').value = '';
-                document.getElementById('password').value = '';
-                
-                // Hide error message after 3 seconds
+                // Redirect after short delay for animation
                 setTimeout(function() {
-                    errorMessage.style.display = 'none';
-                }, 3000);
-            });
+                    window.location.href = 'pws-memorandum.html';
+                }, 1500);
+            }
             
-            // Secret entry point
-            const secretEntry = document.getElementById('secret-entry');
-            secretEntry.addEventListener('click', function() {
-                window.location.href = 'pws-memorandum.html';
+            // Set up Ollie hint in error message
+            const ollieHint = document.querySelector('.ollie-hint');
+            ollieHint.addEventListener('click', function() {
+                showLoadingAndRedirect();
             });
+        });
+        
+        // Add event listener to page visibility changes
+        document.addEventListener('visibilitychange', function() {
+            if (document.visibilityState === 'visible') {
+                // Force hide the loading overlay when page becomes visible again
+                document.getElementById('loading-overlay').style.display = 'none';
+            }
+        });
+        
+        // Also handle page loads via history navigation
+        window.addEventListener('pageshow', function(event) {
+            // When navigating back, event.persisted is true
+            if (event.persisted) {
+                document.getElementById('loading-overlay').style.display = 'none';
+            }
         });
     </script>
 </body>

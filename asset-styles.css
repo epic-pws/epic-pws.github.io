@@ -1,0 +1,274 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    line-height: 1.6;
+    color: #e8f1ff;
+    background: url('public/asset-page/background.jpg') no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100vh;
+    position: relative;
+    background-color: #4120a2;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.__MAIN--MAIN {
+    min-height: 100vh;
+    min-width: 90vw;
+    text-align: center;
+    top: 0;
+    left: 0;
+}
+
+
+.confirm-info--message-heading {
+    font-size: 34px;
+    color: #FFFFFF;
+    margin: 18px 0 0 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    letter-spacing: 1px;
+    font-weight: lighter;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.confirm-info--message-heading img {
+    height: 28px;
+    width: auto;
+    vertical-align: middle;
+    position: relative;
+    top: 2px;
+}
+
+/* Asset Panel Styles */
+.asset-panel {
+    background-color: rgba(6, 32, 64, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px;
+    margin: 20px auto;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.asset-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 15px;
+    position: relative;
+}
+
+.asset-header h2 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.status-badge {
+    background-color: #18a659;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.asset-details {
+    margin-bottom: 25px;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 16px;
+    text-align: left;
+}
+
+.detail-label {
+    width: 140px;
+    font-weight: 500;
+    color: #a8c7ff;
+}
+
+.detail-value {
+    flex: 1;
+    color: #ffffff;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.button-main-text {
+    font-weight: bold;
+    height: 45px;
+    width: 180px;
+    font-size: 14px;
+    color: #FFFFFF;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 8px;
+    background-color: #0395D5;
+    border-color: #0395D5;
+    letter-spacing: 1px;
+    border: 1px solid #0395D5 !important;
+    cursor: pointer;
+}
+
+.button-main-text:hover {
+    background-color: #027fb6;
+}
+
+.button-secondary {
+    font-weight: bold;
+    height: 45px;
+    width: 180px;
+    font-size: 14px;
+    color: #FFFFFF;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid #0395D5 !important;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.button-secondary:hover {
+    background-color: rgba(3, 149, 213, 0.2);
+}
+
+.input-error-msg {
+    color: #ff4e10;
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: italic;
+    margin: 25px 0 0 0;
+    display: none;
+}
+
+.ollie-hint {
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.ollie-hint:hover {
+    color: #ff7a4c;
+    text-decoration: underline;
+}
+
+/* Loading overlay for transition */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(6, 32, 64, 0.9);
+    display: none; /* Hidden by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spinner-image {
+    width: 220px;
+    height: auto;
+    object-fit: contain;
+    animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 700px) {
+    .asset-panel {
+        width: 95%;
+        padding: 15px;
+    }
+    
+    .detail-row {
+        flex-direction: column;
+        margin-bottom: 18px;
+    }
+    
+    .detail-label {
+        width: 100%;
+        margin-bottom: 3px;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+    
+    .button-main-text,
+    .button-secondary {
+        width: 100%;
+        max-width: 220px;
+    }
+}
+
+@media (max-width: 500px) {
+    .confirm-info--message-heading {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 450px) {
+    .asset-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .asset-header h2 {
+        margin-bottom: 5px;
+    }
+    
+    .button-main-text,
+    .button-secondary {
+        font-size: 13px;
+        letter-spacing: 0.5px;
+    }
+    
+    .detail-label,
+    .detail-value {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 400px) {
+    .asset-panel {
+        padding: 12px;
+    }
+}
